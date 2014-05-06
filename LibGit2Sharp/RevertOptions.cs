@@ -48,8 +48,14 @@ namespace LibGit2Sharp
         public bool CommitOnSuccess { get; set; }
 
         /// <summary>
-        /// The index of the parent commits to use as the parent commit.
-        /// The index is 1 based (1st parent is index 1).
+        /// When reverting a merge commit, the parent number to consider as
+        /// mainline, starting from offset 1. 
+        /// <para>
+        ///  As a merge commit has multiple parents, reverting a merge commit
+        ///  will reverse all the changes brought in by the merge except for
+        ///  one parent's line of commits. The parent to preserve is called the
+        ///  mainline, and must be specified by its number (i.e. offset).
+        /// </para>
         /// </summary>
         public int Mainline { get; set; }
 
