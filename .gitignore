@@ -29,6 +29,7 @@ obj/
 _ReSharper*/
 *.ReSharper
 *.ReSharper.user
+.klocwork/
 [Tt]est[Rr]esult*
 [bB]uild/
 *.pidb
