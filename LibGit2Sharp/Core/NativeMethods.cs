@@ -67,8 +67,26 @@ namespace LibGit2Sharp.Core
                 string path = Path.Combine(Path.GetDirectoryName(originalAssemblypath), currentArchSubPath);
 
                 const string pathEnvVariable = "PATH";
-                Environment.SetEnvironmentVariable(pathEnvVariable,
-                                                   String.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", path, Path.PathSeparator, Environment.GetEnvironmentVariable(pathEnvVariable)));
+
+	            if (Environment.GetEnvironmentVariable(pathEnvVariable) == null)
+	            {
+					// No path
+					Environment.SetEnvironmentVariable(
+					   pathEnvVariable,
+					   path);
+	            }
+	            else if (Environment.GetEnvironmentVariable(pathEnvVariable).ToLower().Contains(path.ToLower()) == false)
+	            {
+					// Add to path only once
+		            Environment.SetEnvironmentVariable(
+			            pathEnvVariable,
+			            String.Format(
+				            CultureInfo.InvariantCulture,
+				            "{0}{1}{2}",
+				            path,
+				            Path.PathSeparator,
+				            Environment.GetEnvironmentVariable(pathEnvVariable)));
+	            }
             }
 
             // See LibraryLifetimeObject description.
